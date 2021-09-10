@@ -32,3 +32,11 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+node_modules
+.env
+.secret
+
+#Hardhat files
+cache
+artifacts
