@@ -1,38 +1,32 @@
 import {
   ChevronDownIcon,
-  ChevronRightIcon, CloseIcon, HamburgerIcon
+  ChevronRightIcon,
+  CloseIcon,
+  HamburgerIcon,
 } from '@chakra-ui/icons';
 import {
-  Box, Button, Collapse, Flex, Icon, IconButton, Link,
-  Popover, PopoverContent, PopoverTrigger, Stack, Text, useBreakpointValue, useColorModeValue, useDisclosure
+  Box,
+  Button,
+  Collapse,
+  Flex,
+  Icon,
+  IconButton,
+  Link,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Stack,
+  Text,
+  useBreakpointValue,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
-import Onboard from 'bnc-onboard';
-import {ethers} from 'ethers';
-
-let web3;
-
-const onBoard = Onboard({
-  dappId: '2a7e17fd-f6b3-46c4-bf29-029293a3f693',
-  networkId: 4,
-  subscriptions: {
-    wallet: wallet => {
-      web3 = new ethers.providers.Web3Provider(wallet.provider);
-      console.log(`${wallet.name} is now connected`)
-    }
-  }
-})
-
-const login = async() =>  {
-  await onBoard.walletSelect();
-  await onBoard.walletCheck();
-}
-const getCurrentState = () =>{
-  console.log(onBoard.getState())
-}
+import { useContext } from 'react';
+import WalletContext from '../../contexts/WalletContext';
 
 export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
-
+  const { login } = useContext(WalletContext);
   return (
     <Box>
       <Flex
@@ -100,7 +94,6 @@ export default function NavBar() {
             _hover={{
               bg: 'pink.300',
             }}
-            onClick={() => getCurrentState()}
           >
             Sign Up
           </Button>
